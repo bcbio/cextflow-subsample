@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/your-username/your-repo/master/nextflow_schema.json",
+    "title": "Your Pipeline Parameters",
+    "description": "Schema for the parameters of your Nextflow pipeline",
+    "type": "object",
+    "definitions": {
+        "input_output_options": {
+            "title": "Input/Output Options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["reads", "output"],
+            "properties": {
+                "reads": {
+                    "type": "string",
+                    "format": "path",
+                    "description": "Path to input reads",
+                    "help_text": "Path to input reads (e.g., fastq files)",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "output": {
+                    "type": "string",
+                    "format": "path",
+                    "description": "Path to the output directory",
+                    "help_text": "The output directory where results will be saved",
+                    "fa_icon": "fas fa-folder-open"
+                }
+            }
+        },
+        "processing_options": {
+            "title": "Processing Options",
+            "type": "object",
+            "fa_icon": "fas fa-cogs",
+            "description": "Parameters to customize the processing behavior.",
+            "properties": {
+                "sample_size": {
+                    "type": "integer",
+                    "description": "Number of samples to process",
+                    "default": 1000000,
+                    "minimum": 100,
+                    "fa_icon": "fas fa-sort-numeric-down"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/processing_options"
+        }
+    ]
+}
